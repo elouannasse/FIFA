@@ -19,7 +19,6 @@
                 id="name"
                 name="name"
                 placeholder="Nom du joueur"
-                required
               />
             </div>
 
@@ -30,16 +29,23 @@
                 id="photo"
                 name="photo"
                 placeholder="URL de la photo"
-                required
               />
             </div>
 
             <div class="form-group">
               <label for="position">Position :</label>
-              <select id="position" name="position" required>
+              <select id="position" name="position">
                 <option value="">Sélectionnez la position</option>
-                <option value="joueur">Joueur</option>
-                <option value="gardien">Gardien</option>
+                <option value="GK">Gardien (GK)</option>
+                <option value="CB">Défenseur central (CB)</option>
+                <option value="LB">Arrière gauche (LB)</option>
+                <option value="RB">Arrière droit (RB)</option>
+                <option value="CDM">Milieu défensif (CDM)</option>
+                <option value="CM">Milieu central (CM)</option>
+                <option value="CAM">Milieu offensif (CAM)</option>
+                <option value="RW">Ailier droit (RW)</option>
+                <option value="LW">Ailier gauche (LW)</option>
+                <option value="ST">Attaquant (ST)</option>
               </select>
             </div>
 
@@ -50,7 +56,6 @@
                 id="nationality"
                 name="nationality"
                 placeholder="Nationalité"
-                required
               />
             </div>
 
@@ -61,7 +66,6 @@
                 id="flag"
                 name="flag"
                 placeholder="URL du drapeau"
-                required
               />
             </div>
 
@@ -72,7 +76,6 @@
                 id="club"
                 name="club"
                 placeholder="Nom du club"
-                required
               />
             </div>
 
@@ -83,7 +86,6 @@
                 id="logo"
                 name="logo"
                 placeholder="URL du logo"
-                required
               />
             </div>
           </div>
@@ -98,7 +100,6 @@
                 placeholder="Note (1-100)"
                 min="1"
                 max="100"
-                required
               />
             </div>
 
@@ -111,7 +112,6 @@
                 placeholder="Vitesse"
                 min="1"
                 max="100"
-                required
               />
             </div>
 
@@ -124,7 +124,6 @@
                 placeholder="Tir"
                 min="1"
                 max="100"
-                required
               />
             </div>
 
@@ -137,7 +136,6 @@
                 placeholder="Passes"
                 min="1"
                 max="100"
-                required
               />
             </div>
 
@@ -150,7 +148,6 @@
                 placeholder="Dribble"
                 min="1"
                 max="100"
-                required
               />
             </div>
 
@@ -163,7 +160,6 @@
                 placeholder="Défense"
                 min="1"
                 max="100"
-                required
               />
             </div>
 
@@ -176,38 +172,37 @@
                 placeholder="Physique"
                 min="1"
                 max="100"
-                required
               />
             </div>
           </div>
 
-          <button type="submit">Ajouter Joueur</button>
+          <button type="submit" id="ajou">Ajouter Joueur</button>
         </form>
       </div>
       <div id="divcomplet">
         <center>
           <div id="div2">
-            <div class="iteam item2"></div>
-            <div class="iteam item3"></div>
-            <div class="iteam item4"></div>
+            <div class="iteam item2" jouer_lw="LW"></div>
+            <div class="iteam item3" jouer_st="ST"></div>
+            <div class="iteam item4" jouer_rw="RW"></div>
           </div>
           <div id="div3">
-            <div class="iteam item2"></div>
-            <div class="iteam item3"></div>
-            <div class="iteam item4"></div>
+            <div class="iteam item2 cm" jouer_cm="CDM"></div>
+
+            <div class="iteam item3 cm" jouer_cm="CM">
+              <div class="player-card"></div>
+            </div>
+
+            <div class="iteam item4 cm" jouer_cm="CAM"></div>
           </div>
           <div id="div4">
-            <div class="iteam item1"></div>
-            <div class="iteam item2"></div>
-            <div class="iteam item3"></div>
-            <div class="iteam item4"></div>
+            <div class="iteam item1" jouer_LB="LB"></div>
+            <div class="iteam item2" jouer_cb="CB"></div>
+            <div class="iteam item3" jouer_cb="CB"></div>
+            <div class="iteam item4" jouer_rb="RB"></div>
           </div>
           <div id="div5">
-            <div class="iteam item1"></div>
-            <div class="iteam item2"></div>
-            <div class="iteam item3"></div>
-            <div class="iteam item4"></div>
-            <div class="iteam item5"></div>
+            <div class="iteam item3" gardien_gk="GK"></div>
           </div>
         </center>
       </div>
