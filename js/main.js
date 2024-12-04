@@ -1,6 +1,6 @@
-var positionSelect = document.getElementById("position");
-var goalkeeperFields = document.querySelector(".gardiyan");
-var playerFields = document.querySelector(".joueur");
+let positionSelect = document.getElementById("position");
+let goalkeeperFields = document.querySelector(".gardiyan");
+let playerFields = document.querySelector(".joueur");
 
 positionSelect.addEventListener("click", function () {
   if (positionSelect.value === "GK") {
@@ -17,7 +17,7 @@ document
   .addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const playerData = {
+    let playerData = {
       name: document.getElementById("name").value,
       photo: document.getElementById("photo").value,
       position: document.getElementById("position").value,
@@ -174,7 +174,223 @@ function displayPlayerData(playerData) {
     createplayer(playerElement, playerData);
   }
   positionDiv.appendChild(playerElement);
-  playerCounts[positionClass]++;
+  playerCounts[positionClass] = playerCounts[positionClass] + 1;
+}
+function createGK(playerElement, playerData) {
+  const infoDiv = document.createElement("div");
+  infoDiv.classList.add("info");
+
+  const infoDiv1 = document.createElement("div");
+  infoDiv1.classList.add("info1");
+
+  const flagClubDiv = document.createElement("div");
+  flagClubDiv.classList.add("flag-club");
+
+  const flagImg = document.createElement("img");
+  flagImg.classList.add("flag");
+  flagImg.src = playerData.flag;
+  flagImg.style.width = "15px";
+
+  const logoImg = document.createElement("img");
+  logoImg.classList.add("club");
+  logoImg.src = playerData.club;
+  logoImg.style.width = "15px";
+
+  flagClubDiv.appendChild(flagImg);
+  flagClubDiv.appendChild(logoImg);
+
+  infoDiv1.appendChild(flagClubDiv);
+
+  const img = document.createElement("img");
+  img.classList.add("photo_joueur");
+  img.src = playerData.photo;
+  img.width = 50;
+  img.height = 50;
+  infoDiv1.appendChild(img);
+
+  const ratingSpan = document.createElement("span");
+  ratingSpan.classList.add("rating");
+
+  ratingSpan.textContent = playerData.rating;
+  infoDiv1.appendChild(ratingSpan);
+
+  infoDiv.appendChild(infoDiv1);
+
+  const nameStrong = document.createElement("strong");
+  nameStrong.textContent = playerData.name;
+  nameStrong.classList.add("name");
+  infoDiv.appendChild(nameStrong);
+
+  const infoJoueurDiv = document.createElement("div");
+  infoJoueurDiv.classList.add("information_joueur");
+
+  const divingP = document.createElement("p");
+  divingP.innerHTML = `DIV<span class="d"> ${playerData.diving}</span>`;
+  divingP.classList.add("diving");
+  infoJoueurDiv.appendChild(divingP);
+
+  const handlingP = document.createElement("p");
+  handlingP.innerHTML = `HAN<span class="hand"> ${playerData.handling}</span>`;
+  handlingP.classList.add("handling");
+  infoJoueurDiv.appendChild(handlingP);
+
+  const kickingP = document.createElement("p");
+  kickingP.innerHTML = `KIC<span class="kic"> ${playerData.kicking}</span>`;
+  kickingP.classList.add("kicking");
+  infoJoueurDiv.appendChild(kickingP);
+
+  const reflexesP = document.createElement("p");
+  reflexesP.innerHTML = `REF<span class="fer"> ${playerData.reflexes}</span>`;
+  reflexesP.classList.add("reflexesP");
+  infoJoueurDiv.appendChild(reflexesP);
+
+  const speedP = document.createElement("p");
+  speedP.innerHTML = `SPE<span class="speed"> ${playerData.speed}</span>`;
+  infoJoueurDiv.appendChild(speedP);
+
+  const positioningP = document.createElement("p");
+  positioningP.innerHTML = `POS<span class="pos"> ${playerData.positioning}</span>`;
+  infoJoueurDiv.appendChild(positioningP);
+
+  infoDiv.appendChild(infoJoueurDiv);
+
+  const position = document.createElement("strong");
+  position.classList.add("position_joueur");
+  position.textContent = playerData.position;
+  infoDiv.appendChild(position);
+
+  const actionDiv = document.createElement("div");
+  actionDiv.classList.add("action");
+
+  const trashIcon = document.createElement("i");
+  trashIcon.classList.add("fa-solid", "fa-trash");
+
+  if (playerCounts[playerData.position] >= maxPlayers[playerData.position]) {
+    trashIcon.onclick = function (event) {
+      delete_joueur_reserve(event);
+    };
+    actionDiv.appendChild(trashIcon);
+  } else {
+    trashIcon.onclick = function (event) {
+      deleteT(event);
+    };
+    actionDiv.appendChild(trashIcon);
+  }
+
+  const editIcon = document.createElement("i");
+  editIcon.classList.add("fa-solid", "fa-pen-to-square");
+  editIcon.onclick = function (event) {
+    edit_GK(event);
+  };
+  actionDiv.appendChild(editIcon);
+
+  playerElement.appendChild(infoDiv);
+  playerElement.appendChild(actionDiv);
+}
+
+function createplayer(playerElement, playerData) {
+  const infoDiv = document.createElement("div");
+  infoDiv.classList.add("info");
+
+  const infoDiv1 = document.createElement("div");
+  infoDiv1.classList.add("info1");
+
+  const flagClubDiv = document.createElement("div");
+  flagClubDiv.classList.add("flag-club");
+
+  const flagImg = document.createElement("img");
+  flagImg.classList.add("flag");
+  flagImg.src = playerData.flag;
+  flagImg.style.width = "15px";
+
+  const logoImg = document.createElement("img");
+  logoImg.classList.add("club");
+  logoImg.src = playerData.club;
+  logoImg.style.width = "15px";
+
+  flagClubDiv.appendChild(flagImg);
+  flagClubDiv.appendChild(logoImg);
+
+  infoDiv1.appendChild(flagClubDiv);
+
+  const img = document.createElement("img");
+  img.classList.add("photo_joueur");
+  img.src = playerData.photo;
+  img.width = 50;
+  img.height = 50;
+  infoDiv1.appendChild(img);
+
+  const ratingSpan = document.createElement("span");
+  ratingSpan.classList.add("rating");
+
+  ratingSpan.textContent = playerData.rating;
+  infoDiv1.appendChild(ratingSpan);
+  infoDiv.appendChild(infoDiv1);
+
+  const nameStrong = document.createElement("strong");
+  nameStrong.textContent = playerData.name;
+  nameStrong.classList.add("name");
+  infoDiv.appendChild(nameStrong);
+
+  const infoJoueurDiv = document.createElement("div");
+  infoJoueurDiv.classList.add("information_joueur");
+
+  const paceP = document.createElement("p");
+  paceP.innerHTML = `PAC<span class="pace"> ${playerData.pace}</span>`;
+  paceP.classList.add("pac");
+  infoJoueurDiv.appendChild(paceP);
+
+  const shootingP = document.createElement("p");
+  shootingP.innerHTML = `SHO<span class="sho"> ${playerData.shooting}</span>`;
+  infoJoueurDiv.appendChild(shootingP);
+
+  const passingP = document.createElement("p");
+  passingP.innerHTML = `PAS<span class="pas"> ${playerData.passing}</span>`;
+  infoJoueurDiv.appendChild(passingP);
+
+  const dribblingP = document.createElement("p");
+  dribblingP.innerHTML = `DRI<span class="dri"> ${playerData.dribbling}</span>`;
+  infoJoueurDiv.appendChild(dribblingP);
+
+  const defendingP = document.createElement("p");
+  defendingP.innerHTML = `DEF<span class="def"> ${playerData.defending}</span>`;
+  infoJoueurDiv.appendChild(defendingP);
+
+  const physicalP = document.createElement("p");
+  physicalP.innerHTML = `PHY<span class="phy"> ${playerData.physical}</span>`;
+  infoJoueurDiv.appendChild(physicalP);
+
+  infoDiv.appendChild(infoJoueurDiv);
+
+  const position = document.createElement("strong");
+  position.classList.add("position_joueur");
+  position.textContent = playerData.position;
+  infoDiv.appendChild(position);
+
+  const actionDiv = document.createElement("div");
+  actionDiv.classList.add("action");
+
+  const trashIcon = document.createElement("i");
+  trashIcon.classList.add("fa-solid", "fa-trash");
+  if (playerCounts[playerData.position] >= maxPlayers[playerData.position]) {
+    trashIcon.onclick = function (event) {
+      delete_joueur_reserve(event);
+    };
+    actionDiv.appendChild(trashIcon);
+  } else {
+    trashIcon.onclick = function (event) {
+      deleteT(event);
+    };
+    actionDiv.appendChild(trashIcon);
+  }
+  const editIcon = document.createElement("i");
+  editIcon.classList.add("fa-solid", "fa-pen-to-square");
+  editIcon.onclick = function (event) {
+    edit_joueur(event);
+  };
+  actionDiv.appendChild(editIcon);
+  playerElement.appendChild(infoDiv);
+  playerElement.appendChild(actionDiv);
 }
 
 function addPlayerToReserve(playerData) {
@@ -458,221 +674,4 @@ function save_joueur() {
     positionSelect.disabled = false;
     currentRow = null;
   }
-}
-
-function createGK(playerElement, playerData) {
-  const infoDiv = document.createElement("div");
-  infoDiv.classList.add("info");
-
-  const infoDiv1 = document.createElement("div");
-  infoDiv1.classList.add("info1");
-
-  const flagClubDiv = document.createElement("div");
-  flagClubDiv.classList.add("flag-club");
-
-  const flagImg = document.createElement("img");
-  flagImg.classList.add("flag");
-  flagImg.src = playerData.flag;
-  flagImg.style.width = "15px";
-
-  const logoImg = document.createElement("img");
-  logoImg.classList.add("club");
-  logoImg.src = playerData.club;
-  logoImg.style.width = "15px";
-
-  flagClubDiv.appendChild(flagImg);
-  flagClubDiv.appendChild(logoImg);
-
-  infoDiv1.appendChild(flagClubDiv);
-
-  const img = document.createElement("img");
-  img.classList.add("photo_joueur");
-  img.src = playerData.photo;
-  img.width = 50;
-  img.height = 50;
-  infoDiv1.appendChild(img);
-
-  const ratingSpan = document.createElement("span");
-  ratingSpan.classList.add("rating");
-
-  ratingSpan.textContent = playerData.rating;
-  infoDiv1.appendChild(ratingSpan);
-
-  infoDiv.appendChild(infoDiv1);
-
-  const nameStrong = document.createElement("strong");
-  nameStrong.textContent = playerData.name;
-  nameStrong.classList.add("name");
-  infoDiv.appendChild(nameStrong);
-
-  const infoJoueurDiv = document.createElement("div");
-  infoJoueurDiv.classList.add("information_joueur");
-
-  const divingP = document.createElement("p");
-  divingP.innerHTML = `DIV<span class="d"> ${playerData.diving}</span>`;
-  divingP.classList.add("diving");
-  infoJoueurDiv.appendChild(divingP);
-
-  const handlingP = document.createElement("p");
-  handlingP.innerHTML = `HAN<span class="hand"> ${playerData.handling}</span>`;
-  handlingP.classList.add("handling");
-  infoJoueurDiv.appendChild(handlingP);
-
-  const kickingP = document.createElement("p");
-  kickingP.innerHTML = `KIC<span class="kic"> ${playerData.kicking}</span>`;
-  kickingP.classList.add("kicking");
-  infoJoueurDiv.appendChild(kickingP);
-
-  const reflexesP = document.createElement("p");
-  reflexesP.innerHTML = `REF<span class="fer"> ${playerData.reflexes}</span>`;
-  reflexesP.classList.add("reflexesP");
-  infoJoueurDiv.appendChild(reflexesP);
-
-  const speedP = document.createElement("p");
-  speedP.innerHTML = `SPE<span class="speed"> ${playerData.speed}</span>`;
-  infoJoueurDiv.appendChild(speedP);
-
-  const positioningP = document.createElement("p");
-  positioningP.innerHTML = `POS<span class="pos"> ${playerData.positioning}</span>`;
-  infoJoueurDiv.appendChild(positioningP);
-
-  infoDiv.appendChild(infoJoueurDiv);
-
-  const position = document.createElement("strong");
-  position.classList.add("position_joueur");
-  position.textContent = playerData.position;
-  infoDiv.appendChild(position);
-
-  const actionDiv = document.createElement("div");
-  actionDiv.classList.add("action");
-
-  const trashIcon = document.createElement("i");
-  trashIcon.classList.add("fa-solid", "fa-trash");
-
-  if (playerCounts[playerData.position] >= maxPlayers[playerData.position]) {
-    trashIcon.onclick = function (event) {
-      delete_joueur_reserve(event);
-    };
-    actionDiv.appendChild(trashIcon);
-  } else {
-    trashIcon.onclick = function (event) {
-      deleteT(event);
-    };
-    actionDiv.appendChild(trashIcon);
-  }
-
-  const editIcon = document.createElement("i");
-  editIcon.classList.add("fa-solid", "fa-pen-to-square");
-  editIcon.onclick = function (event) {
-    edit_GK(event);
-  };
-  actionDiv.appendChild(editIcon);
-
-  playerElement.appendChild(infoDiv);
-  playerElement.appendChild(actionDiv);
-}
-
-function createplayer(playerElement, playerData) {
-  const infoDiv = document.createElement("div");
-  infoDiv.classList.add("info");
-
-  const infoDiv1 = document.createElement("div");
-  infoDiv1.classList.add("info1");
-
-  const flagClubDiv = document.createElement("div");
-  flagClubDiv.classList.add("flag-club");
-
-  const flagImg = document.createElement("img");
-  flagImg.classList.add("flag");
-  flagImg.src = playerData.flag;
-  flagImg.style.width = "15px";
-
-  const logoImg = document.createElement("img");
-  logoImg.classList.add("club");
-  logoImg.src = playerData.club;
-  logoImg.style.width = "15px";
-
-  flagClubDiv.appendChild(flagImg);
-  flagClubDiv.appendChild(logoImg);
-
-  infoDiv1.appendChild(flagClubDiv);
-
-  const img = document.createElement("img");
-  img.classList.add("photo_joueur");
-  img.src = playerData.photo;
-  img.width = 50;
-  img.height = 50;
-  infoDiv1.appendChild(img);
-
-  const ratingSpan = document.createElement("span");
-  ratingSpan.classList.add("rating");
-
-  ratingSpan.textContent = playerData.rating;
-  infoDiv1.appendChild(ratingSpan);
-  infoDiv.appendChild(infoDiv1);
-
-  const nameStrong = document.createElement("strong");
-  nameStrong.textContent = playerData.name;
-  nameStrong.classList.add("name");
-  infoDiv.appendChild(nameStrong);
-
-  const infoJoueurDiv = document.createElement("div");
-  infoJoueurDiv.classList.add("information_joueur");
-
-  const paceP = document.createElement("p");
-  paceP.innerHTML = `PAC<span class="pace"> ${playerData.pace}</span>`;
-  paceP.classList.add("pac");
-  infoJoueurDiv.appendChild(paceP);
-
-  const shootingP = document.createElement("p");
-  shootingP.innerHTML = `SHO<span class="sho"> ${playerData.shooting}</span>`;
-  infoJoueurDiv.appendChild(shootingP);
-
-  const passingP = document.createElement("p");
-  passingP.innerHTML = `PAS<span class="pas"> ${playerData.passing}</span>`;
-  infoJoueurDiv.appendChild(passingP);
-
-  const dribblingP = document.createElement("p");
-  dribblingP.innerHTML = `DRI<span class="dri"> ${playerData.dribbling}</span>`;
-  infoJoueurDiv.appendChild(dribblingP);
-
-  const defendingP = document.createElement("p");
-  defendingP.innerHTML = `DEF<span class="def"> ${playerData.defending}</span>`;
-  infoJoueurDiv.appendChild(defendingP);
-
-  const physicalP = document.createElement("p");
-  physicalP.innerHTML = `PHY<span class="phy"> ${playerData.physical}</span>`;
-  infoJoueurDiv.appendChild(physicalP);
-
-  infoDiv.appendChild(infoJoueurDiv);
-
-  const position = document.createElement("strong");
-  position.classList.add("position_joueur");
-  position.textContent = playerData.position;
-  infoDiv.appendChild(position);
-
-  const actionDiv = document.createElement("div");
-  actionDiv.classList.add("action");
-
-  const trashIcon = document.createElement("i");
-  trashIcon.classList.add("fa-solid", "fa-trash");
-  if (playerCounts[playerData.position] >= maxPlayers[playerData.position]) {
-    trashIcon.onclick = function (event) {
-      delete_joueur_reserve(event);
-    };
-    actionDiv.appendChild(trashIcon);
-  } else {
-    trashIcon.onclick = function (event) {
-      deleteT(event);
-    };
-    actionDiv.appendChild(trashIcon);
-  }
-  const editIcon = document.createElement("i");
-  editIcon.classList.add("fa-solid", "fa-pen-to-square");
-  editIcon.onclick = function (event) {
-    edit_joueur(event);
-  };
-  actionDiv.appendChild(editIcon);
-  playerElement.appendChild(infoDiv);
-  playerElement.appendChild(actionDiv);
 }
